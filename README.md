@@ -2,14 +2,22 @@
 
 ## Auth
 
-Register - `/api/register`.
+**Register** - endpoint`/api/register`.
 
 ```javascript
 {
-  user_id: (db will generate id),
   username: (must be a string; required),
   password: (must be a string; required),
-  email:
+  email: (must be a string; required)
+}
+```
+
+**Login** - enpoint`/api/login`
+
+```javascript
+{
+  username: (must be a string; required)
+  password: (must be a string; required)
 }
 ```
 
