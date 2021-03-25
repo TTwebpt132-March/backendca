@@ -7,12 +7,13 @@ const find = () => {
 
 // gets user by id
 const findById = id => {
-	return db('users').select('username').where({ user_id: id }).first();
+	return db('users').select('user_username').where({ user_id: id }).first();
 };
 
 // gets user by filter ('username, id or password')
 const findBy = filter => {
-	return db('users').select('user_id', 'username', 'password').where(filter);
+	console.log(filter);
+	return db('users').select('user_id', 'user_username', 'user_password').where(filter).debug();
 };
 
 // creates a user

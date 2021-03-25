@@ -2,7 +2,7 @@ const Users = require('../models/user-model');
 const bcrypt = require('bcryptjs');
 
 const checkBodyRegister = (req, res, next) => {
-	const { username, password } = req.body;
+	const { username: user_username, password: user_password } = req.body;
 
 	// checks if there is a body
 	if (Object.keys(req.body).length < 1) {
@@ -12,21 +12,21 @@ const checkBodyRegister = (req, res, next) => {
 	}
 
 	// checks if there is a username
-	if (!username) {
+	if (!user_username) {
 		return res.status(401).json({
 			message: 'Username is required.'
 		});
 	}
 
 	// checks for sername length
-	if (username.length < 3 || username.length >= 15) {
+	if (user_username.length < 3 || user_username.length >= 15) {
 		return res.status(401).json({
 			message: 'Username must have at least 3 characters and less then 15 characters'
 		});
 	}
 
 	// checks for password length
-	if (password.length < 3) {
+	if (user_password.length < 3) {
 		return res.status(401).json({
 			message: 'Password must have at least 3 characters.'
 		});
@@ -36,18 +36,23 @@ const checkBodyRegister = (req, res, next) => {
 };
 
 const checkBodyLogin = async (req, res, next) => {
-	const { username, password } = req.body;
+	const { username: user_username, password: user_password } = req.body;
 
-	if (!username || !password) {
+	if (!user_username || !user_password) {
 		return res.status(401).json({
 			message: 'Username and password required.'
 		});
 	}
 
-	const user = await Users.findBy({ username }).first();
-	const passwordValid = await bcrypt.compare(password, user.password);
+	const user = await Users.findBy({ user_username }).first();
+	if (!user) {
+		return res.status(401).json({
+			message: 'Invalid Credentials.'
+		});
+	}
+	const passwordValid = await bcrypt.compare(user_password, user.user_password);
 
-	if (!user || !passwordValid) {
+	if (!passwordValid) {
 		return res.status(401).json({
 			message: 'Invalid Credentials.'
 		});
@@ -58,11 +63,11 @@ const checkBodyLogin = async (req, res, next) => {
 
 const checkUsernameExists = async (req, res, next) => {
 	try {
-		const { username } = req.body;
+		const { username: user_username } = req.body;
 
-		const user = await Users.findBy({ username });
-		console.log(user);
-		if (user.length > 1) {
+		const user = await Users.findBy({ user_username });
+
+		if (user) {
 			return res.status(409).json({
 				message: 'Username is taken.'
 			});

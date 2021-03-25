@@ -8,11 +8,11 @@ const { checkBodyRegister, checkBodyLogin, checkUsernameExists } = require('../m
 // Register User
 router.post('/register', checkBodyRegister, checkUsernameExists, async (req, res, next) => {
 	try {
-		const { username, password, email } = req.body;
+		const { username: user_username, password: user_password, email: user_email } = req.body;
 		const newUser = await Users.add({
-			username,
-			password: await bcrypt.hash(password, 14),
-			email
+			user_username,
+			user_password: await bcrypt.hash(user_password, 14),
+			user_email
 		});
 
 		res.status(201).json(newUser);
@@ -24,20 +24,20 @@ router.post('/register', checkBodyRegister, checkUsernameExists, async (req, res
 // Login User
 router.post('/login', checkBodyLogin, async (req, res, next) => {
 	try {
-		const { username } = req.body;
-		const user = await Users.findBy({ username }).first();
+		const { username: user_username } = req.body;
+		const user = await Users.findBy({ user_username }).first();
 
 		const token = jwt.sign(
 			{
 				userID: user.user_id,
-				username: user.username
+				username: user.user_username
 			},
 			process.env.SECRET
 		);
 
 		res.cookie('token', token);
 		res.json({
-			message: `Welcome, ${user.username}`,
+			message: `Welcome, ${user.user_username}`,
 			token: `${token}`
 		});
 	} catch (err) {
