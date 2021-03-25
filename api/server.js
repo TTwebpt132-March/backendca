@@ -10,7 +10,7 @@ server.use(cors());
 
 server.use('/api/auth/', authRouter);
 
-server.get('/api', (req, res, next) => {
+server.get('/', (req, res, next) => {
 	res.json({
 		message: 'Welcome!'
 	});
