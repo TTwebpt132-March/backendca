@@ -2,7 +2,7 @@
 
 ## Auth
 
-**Register** - endpoint`/api/register`.
+**Register** - endpoint`/api/auth/register`.
 
 ```javascript
 {
@@ -12,7 +12,7 @@
 }
 ```
 
-**Login** - enpoint`/api/login`
+**Login** - enpoint`/api/auth/login`
 
 ```javascript
 {
