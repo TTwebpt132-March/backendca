@@ -10,6 +10,12 @@ server.use(cors());
 
 server.use('/api/auth/', authRouter);
 
+server.get('/api', (req, res, next) => {
+	res.json({
+		message: 'Welcome!'
+	});
+});
+
 server.use((err, req, res, next) => {
 	console.log(err);
 	res.status(500).json({

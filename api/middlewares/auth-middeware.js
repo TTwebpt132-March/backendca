@@ -5,7 +5,7 @@ const checkBodyRegister = (req, res, next) => {
 	const { username, password } = req.body;
 
 	// checks if there is a body
-	if (!req.body) {
+	if (Object.keys(req.body).length < 1) {
 		return res.status(401).json({
 			message: 'Username, password and email are required.'
 		});
@@ -28,7 +28,7 @@ const checkBodyRegister = (req, res, next) => {
 	// checks for password length
 	if (password.length < 3) {
 		return res.status(401).json({
-			message: 'Password is too short. Not strong enough.'
+			message: 'Password must have at least 3 characters.'
 		});
 	}
 
@@ -61,8 +61,8 @@ const checkUsernameExists = async (req, res, next) => {
 		const { username } = req.body;
 
 		const user = await Users.findBy({ username });
-
-		if (user) {
+		console.log(user);
+		if (user.length > 1) {
 			return res.status(409).json({
 				message: 'Username is taken.'
 			});

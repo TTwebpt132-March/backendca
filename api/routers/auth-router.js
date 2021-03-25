@@ -30,14 +30,14 @@ router.post('/login', checkBodyLogin, async (req, res, next) => {
 		const token = jwt.sign(
 			{
 				userID: user.user_id,
-				username: user.user_username
+				username: user.username
 			},
 			process.env.SECRET
 		);
 
 		res.cookie('token', token);
 		res.json({
-			message: `Welcome, ${user.user_name}`,
+			message: `Welcome, ${user.username}`,
 			token: `${token}`
 		});
 	} catch (err) {
