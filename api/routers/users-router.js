@@ -31,7 +31,7 @@ router.put('/:id', async (req, res, next) => {
 		const updatedUser = await Users.update(
 			{
 				user_username,
-				user_password: await bcrypt.hash(user_password, 14),
+				user_password: await bcrypt.hash(user_password, process.env.TIMES),
 				user_email
 			},
 			id
