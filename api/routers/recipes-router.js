@@ -1,6 +1,7 @@
 const express = require('express');
 const Recipes = require('../models/recipe-model');
 
+const { checkRecipeId, checkRecipeBody } = require('../middlewares/recipe-middleware');
 const router = express.Router();
 
 // get all the recipes
@@ -15,7 +16,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // get recipe by id
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', checkRecipeId, async (req, res, next) => {
 	try {
 		const recipe = await Recipes.findById(req.params.id);
 		res.json(recipe);
@@ -25,9 +26,24 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // create a recipe
-router.post('/', async (req, res, next) => {
+router.post('/', checkRecipeBody, async (req, res, next) => {
 	try {
-		const recipe = await Recipes.add(req.body);
+		const {
+			title: recipe_title,
+			source: recipe_source,
+			ingredients: recipe_ingredients,
+			instructions: recipe_instructions,
+			category: recipe_category,
+			photo: recipe_photo_src
+		} = req.body;
+		const recipe = await Recipes.add({
+			recipe_title,
+			recipe_source,
+			recipe_ingredients,
+			recipe_instructions,
+			recipe_category,
+			recipe_photo_src
+		});
 		res.json({
 			message: `Recipe, ${recipe.recipe_title}, was successfully added.`
 		});
@@ -37,9 +53,20 @@ router.post('/', async (req, res, next) => {
 });
 
 // update a recipe
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', checkRecipeId, checkRecipeBody, async (req, res, next) => {
 	try {
-		const updatedRecipe = await Recipes.update(req.body, req.params.id);
+		const {
+			title: recipe_title,
+			source: recipe_source,
+			ingredients: recipe_ingredients,
+			instructions: recipe_instructions,
+			category: recipe_category,
+			photo: recipe_photo_src
+		} = req.body;
+		const updatedRecipe = await Recipes.update(
+			{ recipe_title, recipe_source, recipe_ingredients, recipe_instructions, recipe_category, recipe_photo_src },
+			req.params.id
+		);
 		res.json(updatedRecipe);
 	} catch (err) {
 		next(err);
@@ -47,7 +74,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // delete a recipe
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', checkRecipeId, async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const recipe = await Recipes.nuke(id);

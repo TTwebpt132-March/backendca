@@ -45,23 +45,23 @@ password: lambda123
 
 ## Recipes
 
-| Action               | Method | Route              | Required                                                                   |
-| -------------------- | ------ | ------------------ | -------------------------------------------------------------------------- |
-| Read All Recipes     | GET    | `/api/recipes`     | `n/a`                                                                      |
-| Read Selected Recipe | GET    | `/api/recipes/:id` | `n/a`                                                                      |
-| Create Recipe        | POST   | `/api/recipes`     | `{recipe_title, recipe_ingredients, recipe_category, recipe_instructions}` |
-| Update Recipe        | PUT    | `/api/recipes/:id` | `{recipe_title, recipe_ingredients, recipe_category, recipe_instructions}` |
-| Delete Recipe        | DELETE | `/api/recipes/:id` | `n/a`                                                                      |
+| Action               | Method | Route              | Required                                       |
+| -------------------- | ------ | ------------------ | ---------------------------------------------- |
+| Read All Recipes     | GET    | `/api/recipes`     | `n/a`                                          |
+| Read Selected Recipe | GET    | `/api/recipes/:id` | `n/a`                                          |
+| Create Recipe        | POST   | `/api/recipes`     | `{title, ingredients, category, instructions}` |
+| Update Recipe        | PUT    | `/api/recipes/:id` | `{title, ingredients, category, instructions}` |
+| Delete Recipe        | DELETE | `/api/recipes/:id` | `n/a`                                          |
 
 **_Format To Send to DB_** - for creating & updating
 
 ```javascript
 {
-  recipe_title: "string", required
-  recipe_source: "string",
-  recipe_ingredients: ["array"], required
-  recipe_instructions: "string",
-  recipe_category: ["array"], required
-  recipe_photo_src: "string"
+  title: "string", required
+  source: "string",
+  ingredients: ["array"], required
+  instructions: "string",
+  category: ["array"], required
+  photo_src: "string"
 }
 ```
