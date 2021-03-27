@@ -35,11 +35,7 @@ const nuke = user_id => {
 // gets users recipes
 const userRecipes = async id => {
 	console.log(id);
-	const user = await db('users as u')
-		// .leftJoin('recipes as r', 'u.user_id', 'r.user_id')
-		.where('u.user_id', id)
-		.select('u.user_id', 'u.user_username')
-		.debug();
+	const user = await db('users as u').where('u.user_id', id).select('u.user_id', 'u.user_username').debug();
 
 	const recipes = await db('recipes as r').where('r.user_id', id).select('r.*');
 

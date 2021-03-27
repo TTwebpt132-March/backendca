@@ -24,8 +24,8 @@ router.post('/register', checkBodyRegister, checkUsernameExists, async (req, res
 // Login User
 router.post('/login', checkBodyLogin, async (req, res, next) => {
 	try {
-		const { username } = req.body;
-		const user_username = username;
+		const { username: user_username } = req.body;
+
 		const user = await Users.findBy({ user_username }).first();
 
 		const token = jwt.sign(

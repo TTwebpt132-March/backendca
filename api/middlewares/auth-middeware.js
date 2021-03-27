@@ -37,10 +37,9 @@ const checkBodyRegister = (req, res, next) => {
 
 const checkBodyLogin = async (req, res, next) => {
 	try {
-		const { username, password } = req.body;
+		const { username: user_username, password } = req.body;
 
-		const user_username = username;
-		if (!username || !password) {
+		if (!user_username || !password) {
 			return res.status(401).json({
 				message: 'Username and password required.'
 			});
