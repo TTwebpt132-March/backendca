@@ -4,9 +4,10 @@ exports.up = async function (knex) {
 		table.text('recipe_title').notNull();
 		table.text('recipe_source');
 		table.text('recipe_ingredients').notNull();
+		table.text('recipe_instructions').notNull();
 		table.text('recipe_category').notNull();
 		table.text('recipe_photo_src');
-		table.integer('user_id').references('user_id');
+		table.integer('user_id').references('user_id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE');
 	});
 };
 
