@@ -14,7 +14,7 @@ password: lambda123
 | Register/Create | POST   | `/api/auth/register` | `{username, password, email}` |
 | Login           | POST   | `/api/auth/login`    | `{username, password}`        |
 
-**_Format To Send to DB_** - for registering
+**_Format To Send To DB_** - for registering
 
 ```javascript
 {
@@ -33,7 +33,7 @@ password: lambda123
 | Edit User          | PUT    | `/api/users/:id` | `{username, password, email}` |
 | Delete User        | DELETE | `/api/users/:id` | `n/a`                         |
 
-**_Format To Send to DB_** - for updating
+**_Format To Send To DB_** - for updating
 
 ```javascript
 {
@@ -53,7 +53,7 @@ password: lambda123
 | Update Recipe        | PUT    | `/api/recipes/:id` | `{title, ingredients, category, instructions}` |
 | Delete Recipe        | DELETE | `/api/recipes/:id` | `n/a`                                          |
 
-**_Format To Send to DB_** - for creating & updating
+**_Format To Send To DB_** - for creating & updating
 
 ```javascript
 {
