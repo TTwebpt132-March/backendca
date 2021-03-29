@@ -4,6 +4,7 @@ module.exports = (req, res, next) => {
 	try {
 		const token = req.cookies.token || req.headers.Authorization;
 
+		console.log(token);
 		if (!token) {
 			return res.status(401).json({
 				message: 'Token required.'
