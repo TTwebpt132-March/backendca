@@ -41,7 +41,6 @@ router.post('/login', checkBodyLogin, async (req, res, next) => {
 			message: `Welcome, ${user.user_username}`,
 			token: `${token}`
 		});
-		console.log('Token: ', token);
 	} catch (err) {
 		next(err);
 	}
