@@ -36,7 +36,10 @@ router.post('/login', checkBodyLogin, async (req, res, next) => {
 			process.env.SECRET
 		);
 
-		res.cookie('token', token).send('ok');
+		res.cookie('token', token, {
+			expires: new Date(Date.now() + 900000),
+			httpOnly: true
+		});
 		res.json({
 			message: `Welcome, ${user.user_username}`,
 			token: `${token}`
