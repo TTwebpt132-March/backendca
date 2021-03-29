@@ -36,6 +36,8 @@ router.post('/login', checkBodyLogin, async (req, res, next) => {
 			process.env.SECRET
 		);
 
+		console.log(token);
+
 		res.cookie('token', token);
 		res.json({
 			message: `Welcome, ${user.user_username}`,
