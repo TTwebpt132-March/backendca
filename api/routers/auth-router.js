@@ -36,7 +36,7 @@ router.post('/login', checkBodyLogin, async (req, res, next) => {
 			process.env.SECRET
 		);
 
-		res.cookie('token', token, { domain: 'http://localhost:3000', secure: true });
+		res.cookie('token', token, { domain: 'http://localhost:3000', path='/', secure: true });
 		res.json({
 			message: `Welcome, ${user.user_username}`,
 			token: `${token}`
