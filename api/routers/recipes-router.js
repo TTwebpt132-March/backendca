@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
 	try {
 		const recipes = await Recipes.find();
-		console.log(recipes);
+
 		res.json(recipes);
 	} catch (err) {
 		next(err);

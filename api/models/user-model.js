@@ -12,7 +12,6 @@ const findById = id => {
 
 // gets user by filter ('username, id or password')
 const findBy = filter => {
-	console.log(filter);
 	return db('users').select('user_id', 'user_username', 'user_password', 'user_email').where(filter);
 };
 
@@ -34,12 +33,10 @@ const nuke = user_id => {
 
 // gets users recipes
 const userRecipes = async id => {
-	console.log(id);
 	const user = await db('users as u').where('u.user_id', id).select('u.user_id', 'u.user_username').debug();
 
 	const recipes = await db('recipes as r').where('r.user_id', id).select('r.*');
 
-	console.log(user);
 	const result = {
 		user_id: user[0].user_id,
 		user_username: user[0].user_username,
@@ -48,9 +45,9 @@ const userRecipes = async id => {
 				id: rec.recipe_id,
 				title: rec.recipe_title,
 				recipe_source: rec.recipe_source,
-				recipe_ingredients: rec.recipe_ingredients,
+				recipe_ingredients: rec.recipe_ingredients.split(',').map(i => i.replace(/[{}""]/g, '')),
 				recipe_instructions: rec.recipe_instructions,
-				recipe_category: rec.recipe_category,
+				recipe_category: rec.recipe_category.split(',').map(i => i.replace(/[{}""]/g, '')),
 				recipe_photo_src: rec.recipe_photo_src
 			};
 		})

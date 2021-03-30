@@ -1,8 +1,22 @@
 const db = require('../data/db-config');
 
 // get all recipes
-const find = () => {
-	return db('recipes');
+const find = async () => {
+	const recipes = await db('recipes');
+
+	const result = recipes.map(rec => {
+		return {
+			id: rec.recipe_id,
+			title: rec.recipe_title,
+			recipe_source: rec.recipe_source,
+			recipe_ingredients: rec.recipe_ingredients.split(',').map(i => i.replace(/[{}""]/g, '')),
+			recipe_instructions: rec.recipe_instructions,
+			recipe_category: rec.recipe_category.split(',').map(i => i.replace(/[{}""]/g, '')),
+			recipe_photo_src: rec.recipe_photo_src
+		};
+	});
+
+	return result;
 };
 
 // get recipe by id
@@ -18,14 +32,12 @@ const add = async recipe => {
 
 // update recipe
 const update = async (recipe, id) => {
-	console.log(recipe, id);
 	const [recipe_id] = await db('recipes').update(recipe).where('recipe_id', id).returning('recipe_id');
 	return findById(recipe_id);
 };
 
 // delete a recipe
 const nuke = id => {
-	console.log(id);
 	return db('recipes').where({ recipe_id: id }).del();
 };
 
