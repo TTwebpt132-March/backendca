@@ -45,13 +45,14 @@ password: lambda123
 
 ## Recipes
 
-| Action               | Method | Route              | Required                                       |
-| -------------------- | ------ | ------------------ | ---------------------------------------------- |
-| Read All Recipes     | GET    | `/api/recipes`     | `n/a`                                          |
-| Read Selected Recipe | GET    | `/api/recipes/:id` | `n/a`                                          |
-| Create Recipe        | POST   | `/api/recipes`     | `{title, ingredients, category, instructions}` |
-| Update Recipe        | PUT    | `/api/recipes/:id` | `{title, ingredients, category, instructions}` |
-| Delete Recipe        | DELETE | `/api/recipes/:id` | `n/a`                                          |
+| Action               | Method | Route                   | Required                                                |
+| -------------------- | ------ | ----------------------- | ------------------------------------------------------- |
+| Read All Recipes     | GET    | `/api/recipes`          | `n/a`                                                   |
+| Read Selected Recipe | GET    | `/api/recipes/:id`      | `n/a`                                                   |
+| Read User's Recipes  | GET    | `api/users/:id/recipes` | `n/a`                                                   |
+| Create Recipe        | POST   | `/api/recipes`          | `{user_id, title, ingredients, category, instructions}` |
+| Update Recipe        | PUT    | `/api/recipes/:id`      | `{user_id, title, ingredients, category, instructions}` |
+| Delete Recipe        | DELETE | `/api/recipes/:id`      | `n/a`                                                   |
 
 **_Format To Send To DB_** - for creating & updating
 
