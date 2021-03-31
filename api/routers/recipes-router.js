@@ -58,6 +58,7 @@ router.post('/', checkRecipeBody, async (req, res, next) => {
 router.put('/:id', checkRecipeId, checkRecipeBody, async (req, res, next) => {
 	try {
 		const {
+			user_id,
 			title: recipe_title,
 			source: recipe_source,
 			ingredients: recipe_ingredients,
@@ -66,7 +67,15 @@ router.put('/:id', checkRecipeId, checkRecipeBody, async (req, res, next) => {
 			photo: recipe_photo_src
 		} = req.body;
 		const updatedRecipe = await Recipes.update(
-			{ recipe_title, recipe_source, recipe_ingredients, recipe_instructions, recipe_category, recipe_photo_src },
+			{
+				user_id,
+				recipe_title,
+				recipe_source,
+				recipe_ingredients,
+				recipe_instructions,
+				recipe_category,
+				recipe_photo_src
+			},
 			req.params.id
 		);
 		res.json(updatedRecipe);

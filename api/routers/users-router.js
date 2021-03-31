@@ -57,6 +57,7 @@ router.delete('/:id', async (req, res, next) => {
 // get user's recipes
 router.get('/:id/recipes', async (req, res, next) => {
 	try {
+		console.log(req.params.id);
 		const recipes = await Users.userRecipes(req.params.id);
 
 		res.json(recipes);

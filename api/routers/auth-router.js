@@ -11,7 +11,7 @@ router.post('/register', checkBodyRegister, checkUsernameExists, async (req, res
 		const { username: user_username, password: user_password, email: user_email } = req.body;
 		const newUser = await Users.add({
 			user_username,
-			user_password: await bcrypt.hash(user_password, process.env.TIMES),
+			user_password: await bcrypt.hash(user_password, 9),
 			user_email
 		});
 
