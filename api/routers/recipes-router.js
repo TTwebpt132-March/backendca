@@ -29,6 +29,7 @@ router.get('/:id', checkRecipeId, async (req, res, next) => {
 router.post('/', checkRecipeBody, async (req, res, next) => {
 	try {
 		const {
+			user_id,
 			title: recipe_title,
 			source: recipe_source,
 			ingredients: recipe_ingredients,
@@ -37,6 +38,7 @@ router.post('/', checkRecipeBody, async (req, res, next) => {
 			photo: recipe_photo_src
 		} = req.body;
 		const recipe = await Recipes.add({
+			user_id,
 			recipe_title,
 			recipe_source,
 			recipe_ingredients,
