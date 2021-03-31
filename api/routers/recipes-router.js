@@ -60,11 +60,11 @@ router.put('/:id', checkRecipeId, checkRecipeBody, async (req, res, next) => {
 		const {
 			user_id,
 			title: recipe_title,
-			recipe_source,
-			recipe_ingredients,
-			recipe_instructions,
-			recipe_category,
-			recipe_photo_src
+			source: recipe_source,
+			ingredients: recipe_ingredients,
+			instructions: recipe_instructions,
+			category: recipe_category,
+			photo: recipe_photo_src
 		} = req.body;
 		const updatedRecipe = await Recipes.update(
 			{
