@@ -58,6 +58,7 @@ password: lambda123
 
 ```javascript
 {
+  user_id: "integer", required
   title: "string", required
   source: "string",
   ingredients: ["array"], required
