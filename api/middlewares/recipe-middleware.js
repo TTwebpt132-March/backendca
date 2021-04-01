@@ -2,7 +2,7 @@ const Recipes = require('../models/recipe-model');
 
 const checkRecipeBody = (req, res, next) => {
 	const { title, ingredients, instructions, category } = req.body;
-	console.log(req.body);
+
 	if (!Object.keys(req.body).length) {
 		return res.status(409).json({
 			message: 'Nothing was sent.'

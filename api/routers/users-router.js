@@ -31,7 +31,7 @@ router.put('/:id', async (req, res, next) => {
 		const updatedUser = await Users.update(
 			{
 				user_username,
-				user_password: await bcrypt.hash(user_password, process.env.TIMES),
+				user_password: await bcrypt.hash(user_password, 9),
 				user_email
 			},
 			id
@@ -57,7 +57,6 @@ router.delete('/:id', async (req, res, next) => {
 // get user's recipes
 router.get('/:id/recipes', async (req, res, next) => {
 	try {
-		console.log(req.params.id);
 		const recipes = await Users.userRecipes(req.params.id);
 
 		res.json(recipes);

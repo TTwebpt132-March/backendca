@@ -46,7 +46,7 @@ router.post('/', checkRecipeBody, async (req, res, next) => {
 			recipe_category,
 			recipe_photo_src
 		});
-		res.json({
+		res.status(201).json({
 			message: `Recipe, ${recipe.recipe_title}, was successfully added.`
 		});
 	} catch (err) {

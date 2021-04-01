@@ -33,7 +33,7 @@ const nuke = user_id => {
 
 // gets users recipes
 const userRecipes = async id => {
-	const user = await db('users as u').where('u.user_id', id).select('u.user_id', 'u.user_username').debug();
+	const user = await db('users as u').where('u.user_id', id).select('u.user_id', 'u.user_username');
 
 	const recipes = await db('recipes as r').where('r.user_id', id).select('r.*');
 
